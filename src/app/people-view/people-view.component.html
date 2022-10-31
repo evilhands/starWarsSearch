@@ -1,0 +1,4 @@
+<p>Name: {{people.name}}</p>
+<p>Species: <span *ngFor="let species of people.species">{{species | sw | async }}</span></p>
+<p>Movies: <span *ngFor="let films of people.films">{{films | sw | async }}</span></p>
+<p>Spaceships: <span *ngFor="let starships of people.starships">{{starships | sw | async }}</span></p>
