@@ -1,0 +1,27 @@
+<section>
+    <h2>
+        People from Star Wars
+    </h2>
+</section>
+<div *ngIf="people$ | async as result">
+    <div>
+        <label for="movies">Filter by movies:</label>
+        <select name="movies" id="movies">
+            <option *ngFor="let movie of movies$ | async" value="movie.title" (click)=filterMovie(movie.url)>
+                {{movie.title}}</option>
+        </select>
+    </div>
+    <article>
+        <div *ngFor="let people of result.results; let i=index">
+            <a (click)=clickView(i)>
+                Name: {{people.name}}
+                Species: <span *ngFor="let species of people.species">{{species | sw | async }}</span>
+            </a>
+        </div>
+        <button *ngIf="result.previous" (click)=getPeople(result.previous)>previous</button>
+        <button *ngIf="result.next" (click)=getPeople(result.next)>next</button>
+    </article>
+    <article>
+        <app-people-view *ngIf="selected" [people]="result.results[selected]"></app-people-view>
+    </article>
+</div>
